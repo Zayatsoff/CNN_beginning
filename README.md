@@ -1,5 +1,5 @@
 # CNN_Cifar10
-## [CIFAR-10 Dataset] (https://www.cs.toronto.edu/~kriz/cifar.html)
+## [CIFAR-10 Dataset](https://www.cs.toronto.edu/~kriz/cifar.html)
 Classifying between 10 different cotegories of 32x32 images.
 * Conv2D : 32 kernels each 4x4 Act: RELU
 * MaxPool2D 2x2
