@@ -40,3 +40,11 @@ training_data = datasets.CIFAR10(
 test_data = datasets.CIFAR10(
     root="data", train=False, download=DOWNLOAD_DATASET, transform=transformation
 )
+
+# DataLoader
+train_dataloader = DataLoader(training_data, batch_size=BATCH_SIZE, shuffle=True)
+test_dataloader = DataLoader(test_data, batch_size=BATCH_SIZE, shuffle=True)
+
+# Initializing model
+
+model = AlexNet()
