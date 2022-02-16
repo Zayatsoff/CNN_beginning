@@ -5,55 +5,56 @@ class AlexNet(nn.Module):
     def __init__(self):
         super(AlexNet, self).__init__()
         self.conv_layers = nn.Sequential(
-            # Input: (b x 3 x 227 x 227)
+            # Input: (b x 3 x 32 x 32)
             # Conv 1
             nn.Conv2d(
-                in_channels=3, out_channels=96, kernel_size=11, stride=4
-            ),  # (b x 96 x 55 x 55)
+                in_channels=3, out_channels=64, kernel_size=11, stride=4, padding=2
+            ),  # (b x 64 x 15 x 15)
             nn.ReLU(),
             nn.LocalResponseNorm(size=5, k=2.0),
-            nn.MaxPool2d(kernel_size=3, stride=2),  # (b x 96 x 27 x 27)
+            nn.MaxPool2d(kernel_size=3, stride=2),  # (b x 64 x 7 x 7)
             # Conv 2
             nn.Conv2d(
-                in_channels=96, out_channels=256, kernel_size=5, padding=1
-            ),  # (b x 256 x 27 x 27)
+                in_channels=64, out_channels=192, kernel_size=3, padding=1
+            ),  # (b x 192 x 7 x 7)
             nn.ReLU(),
             nn.LocalResponseNorm(size=5, k=2.0),
-            nn.MaxPool2d(kernel_size=3, stride=2),  # (b x 256 x 13 x 13)
+            nn.MaxPool2d(kernel_size=3, stride=2),  # (b x 192 x 3 x 3)
             # Conv 3
             nn.Conv2d(
-                in_channels=256, out_channels=385, kernel_size=3, padding=1
-            ),  # (b x 384 x 13 x 13)
+                in_channels=192, out_channels=384, kernel_size=3, padding=1
+            ),  # (b x 384 x 3 x 3)
             nn.ReLU(),
             # Conv 4
             nn.Conv2d(
-                in_channels=385, out_channels=385, kernel_size=3, padding=1
-            ),  # (b x 384 x 13 x 13)
+                in_channels=384, out_channels=256, kernel_size=3, padding=1
+            ),  # (b x 256 x 3 x 3)
             nn.ReLU(),
             # Conv 5
             nn.Conv2d(
-                in_channels=385, out_channels=256, kernel_size=3, padding=1
-            ),  # (b x 256 x 13 x 13)
+                in_channels=256, out_channels=256, kernel_size=3, padding=1
+            ),  # (b x 256 x 3 x 3)
             nn.ReLU(),
-            nn.MaxPool2d(kernel_size=3, stride=2),  # (b x 256 x 6 x 6)
+            nn.MaxPool2d(kernel_size=3, stride=2),  # (b x 256 x 1 x 1)
+            # nn.Flatten(),
         )
         self.lin_layers = nn.Sequential(
             # Linear 1
-            nn.Dropout(p=0.5, inplace=True),
-            nn.Linear(in_features=256 * 6 * 6, out_features=4096),
+            nn.Dropout(p=0.5),
+            nn.Linear(in_features=256 * 1 * 1, out_features=4096),
             nn.ReLU(),
             # Linear 2
-            nn.Dropout(p=0.5, inplace=True),
+            nn.Dropout(p=0.5),
             nn.Linear(in_features=4096, out_features=4096),
             nn.ReLU(),
             # Linear 3
-            nn.Linear(in_features=4096, out_features=4096),
+            nn.Linear(in_features=4096, out_features=10),
             nn.ReLU(),
             # Softmax
-            nn.Softmax(10),
+            nn.Softmax(),
         )
 
     def forward(self, x):
         x = self.conv_layers(x)
-        x = x.view(-1, 256 * 6 * 6)  # flatten
+        x = x.view(x.size(0), -1)  # flatten
         return self.lin_layers(x)
