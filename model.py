@@ -9,7 +9,8 @@ class AlexNet(nn.Module):
         self.anet = nn.Sequential(
             # Input: 224*224*3
             nn.Conv2d(in_channels=3, out_channels=96, kernel_size=11, stride=4),
-            F.local_response_norm(),
+            F.local_response_norm(size=5, k=2.0),
+            F.max_pool2d(),
         )
 
     def forward(self, x):
