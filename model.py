@@ -4,7 +4,7 @@ import torch.nn.functional as F
 
 
 class AlexNet(nn.Module):
-    def __init__(self, channels_img, features_d):
+    def __init__(self):
         super(AlexNet, self).__init__()
         self.anet = nn.Sequential(
             # Input: (b x 3 x 227 x 227)
