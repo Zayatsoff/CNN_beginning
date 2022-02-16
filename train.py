@@ -21,7 +21,7 @@ CHANNELS_IMG = 3
 EPOCHS = 90
 # MOMENTUM = 0.9 Used by paper
 # WEIGHT_DECAY = 5e-4 Used by paper
-DOWNLOAD_DATASET = True
+DOWNLOAD_DATASET = False
 
 # Dataset
 transformation = transforms.Compose(
@@ -43,7 +43,7 @@ train_dataloader = DataLoader(training_data, batch_size=BATCH_SIZE, shuffle=True
 
 # Initializing model
 
-model = AlexNet()
+model = AlexNet().to(device)
 
 # Optim
 optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE)  # Paper used SGD
