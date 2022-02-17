@@ -1,17 +1,14 @@
-# CNN_Cifar10
-## [CIFAR-10 Dataset](https://www.cs.toronto.edu/~kriz/cifar.html)
+## PyTorch implementation of [AlexNet](https://proceedings.neurips.cc/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf) trained on [CIFAR-10 Dataset](https://www.cs.toronto.edu/~kriz/cifar.html)
 Classifying between 10 different cotegories of 32x32 images.
-* Conv2D : 32 kernels each 4x4 Act: RELU
-* MaxPool2D 2x2
-* Conv2D : 32 kernels each 4x4 Act: RELU
-* MaxPool2D 2x2
-* Dense : 256 Act: RELU
-* Optimizer : Adam
-#### Accuracy : 68%
 
+Differences:
+* Optimizer : Adam instead of SGD
+#### Train Set Accuracy : 99.82%  
+#### Validation Set Accuracy : 79.58%
+TODO:
+- [ ] Reduce overfitting
 
-# CNN_Cells
-## [Malaria Dataset from NLM](https://lhncbc.nlm.nih.gov/LHC-publications/pubs/MalariaDatasets.html)
+## Simple CNN classifier in TensorFlow trained on a [Malaria Dataset from NLM](https://lhncbc.nlm.nih.gov/LHC-publications/pubs/MalariaDatasets.html)
 Parasitized vs uninfected cells
 * Conv2D : 32 kernels each 3x3 Act: RELU
 * MaxPool2D 2x2
@@ -23,4 +20,4 @@ Parasitized vs uninfected cells
 * Dropout : 0.5
 * Optimizer : Adam
 
-#### Accuracy : 94%
+### Accuracy : 94%
