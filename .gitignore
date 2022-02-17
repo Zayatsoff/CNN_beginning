@@ -11,3 +11,4 @@ data/cifar-10-batches-py/test_batch
 data/cifar-10-python.tar.gz
 __pycache__/model.cpython-38.pyc
 __pycache__/utils.cpython-38.pyc
+CHECKPOINT.pt
