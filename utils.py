@@ -140,3 +140,29 @@ def train_classifier(
     print("Total Training Time: %.2f min" % ((time.time() - start_time) / 60))
 
     return
+
+
+def validate_classifier(
+    model,
+    device,
+    valid_loader=None,
+):
+
+    log_dict = {
+        "train_loss_per_batch": [],
+        "train_acc_per_epoch": [],
+        "train_loss_per_epoch": [],
+        "valid_acc_per_epoch": [],
+        "valid_loss_per_epoch": [],
+    }
+    model.eval()
+
+    with torch.set_grad_enabled(False):  # save memory during inference
+
+        valid_acc = compute_accuracy(model, valid_loader, device)
+        valid_loss = compute_epoch_loss(model, valid_loader, device)
+        print("*** Valid. Acc.: %.3f%% | Loss: %.3f")
+        log_dict["valid_loss_per_epoch"].append(valid_loss.item())
+        log_dict["valid_acc_per_epoch"].append(valid_acc.item())
+
+    return
