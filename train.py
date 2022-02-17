@@ -16,7 +16,7 @@ LOAD_MODEL = False
 device = torch.device("cuda" if torch.cuda.is_available else "cpu")
 LEARNING_RATE = 0.001  # Paper sued 0.01
 BATCH_SIZE = 128
-IMAGE_SIZE = 64
+IMAGE_SIZE = 224
 CHANNELS_IMG = 3
 EPOCHS = 90
 # MOMENTUM = 0.9 Used by paper
@@ -69,46 +69,3 @@ log_dict = train_classifier(
     valid_loader=test_dataloader,
     logging_interval=50,
 )
-
-
-# def train(model, optimizer, dataloader, epoch, EPOCHS):
-#     print("---TRAINING---")
-#     total_steps = 1
-#     model.train()
-#     if epoch % 5 == 0:
-#         # Save checkpoint
-#         save_checkpoint(model, optimizer, filename="CHECKPOINT.pt")
-#     for images, classes in dataloader:
-#         images, classes = images.to(device), classes.to(device)
-
-#         # Calcualte loss
-#         output = model(images)
-#         loss = F.cross_entropy(output, classes)
-
-#         # Update  parameters
-#         optimizer.zero_grad()
-#         loss.backward()
-#         optimizer.step()
-
-#         if epoch % 5 == 0:
-#             with torch.no_grad():
-#                 # also print and save parameter values
-#                 print("---")
-#                 for name, parameter in model.named_parameters():
-#                     # Print grad of the parameters
-#                     if parameter.grad is not None:
-#                         avg_grad = torch.mean(parameter.grad)
-#                         print(f"Grad Avg. {avg_grad}")
-#                     # Print parameters values
-#                     if parameter.data is not None:
-#                         avg_weight = torch.mean(parameter.data)
-#                         print(f"Parameter Avg. {avg_weight}")
-#                     # Print epoch and loss
-#                     print(f"Epoch [{epoch}/{EPOCHS}] Loss: {loss:.4f}")
-
-#         total_steps += 1
-
-
-# for epoch in range(EPOCHS):
-#     lr_scheduler.step()
-#     train(model, optimizer, train_dataloader, epoch, EPOCHS)

@@ -3,7 +3,7 @@ import torch.nn.functional as F
 import time
 
 
-def save_checkpoint(model, optimizer, filename="checkpoint.pth.tar"):
+def save_checkpoint(model, optimizer, filename="checkpoint.pt"):
     print("=> Saving checkpoint")
     checkpoint = {
         "state_dict": model.state_dict(),
@@ -22,7 +22,8 @@ def load_checkpoint(filename, model, optimizer, lr):
     for param_group in optimizer.param_groups:
         param_group["lr"] = lr
 
-# taken from https://github.com/rasbt/deeplearning-models
+
+# Taken from https://github.com/rasbt/deeplearning-models
 def compute_epoch_loss(model, data_loader, device):
     model.eval()
     curr_loss, num_examples = 0.0, 0
@@ -38,7 +39,8 @@ def compute_epoch_loss(model, data_loader, device):
         curr_loss = curr_loss / num_examples
         return curr_loss
 
-# taken from https://github.com/rasbt/deeplearning-models
+
+# Taken from https://github.com/rasbt/deeplearning-models
 def compute_accuracy(model, data_loader, device):
     model.eval()
     with torch.no_grad():
@@ -54,7 +56,8 @@ def compute_accuracy(model, data_loader, device):
             correct_pred += (predicted_labels == targets).sum()
     return correct_pred.float() / num_examples * 100
 
-# taken from https://github.com/rasbt/deeplearning-models
+
+# Modified from https://github.com/rasbt/deeplearning-models
 def train_classifier(
     num_epochs,
     model,
@@ -131,6 +134,8 @@ def train_classifier(
                     log_dict["valid_acc_per_epoch"].append(valid_acc.item())
 
         print("Time elapsed: %.2f min" % ((time.time() - start_time) / 60))
+        save_checkpoint(model, optimizer)
+        print("Saved!")
 
     print("Total Training Time: %.2f min" % ((time.time() - start_time) / 60))
 
