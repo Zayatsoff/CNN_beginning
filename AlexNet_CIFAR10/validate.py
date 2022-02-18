@@ -44,7 +44,7 @@ model = AlexNet().to(device)
 optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE)  # Paper used SGD
 
 if LOAD_MODEL:
-    load_checkpoint("checkpoint.pt", model, optimizer, LEARNING_RATE)
+    load_checkpoint("AlexNet_CIFAR10\\checkpoint.pt", model, optimizer, LEARNING_RATE)
 
 
 log_dict = validate_classifier(

@@ -9,13 +9,13 @@ from utils import load_checkpoint, train_classifier
 
 
 # HyperParams
-LOAD_MODEL = False
+LOAD_MODEL = True
 device = torch.device("cuda" if torch.cuda.is_available else "cpu")
 LEARNING_RATE = 0.001  # Paper sued 0.01
 BATCH_SIZE = 128
 IMAGE_SIZE = 224
 CHANNELS_IMG = 3
-EPOCHS = 90
+EPOCHS = 4
 # MOMENTUM = 0.9 Used by paper
 # WEIGHT_DECAY = 5e-4 Used by paper
 DOWNLOAD_DATASET = False
@@ -54,7 +54,7 @@ optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE)  # Paper used SGD
 lr_scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=30, gamma=0.1)
 
 if LOAD_MODEL:
-    load_checkpoint("CHECKPOINT.pt", model, optimizer, LEARNING_RATE)
+    load_checkpoint("AlexNet_CIFAR10\\checkpoint.pt", model, optimizer, LEARNING_RATE)
 
 
 log_dict = train_classifier(

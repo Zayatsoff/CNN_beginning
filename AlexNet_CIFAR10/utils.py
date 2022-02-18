@@ -146,6 +146,7 @@ def validate_classifier(
     model,
     device,
     valid_loader=None,
+    loss_fn=None,
 ):
 
     log_dict = {
@@ -155,13 +156,17 @@ def validate_classifier(
         "valid_acc_per_epoch": [],
         "valid_loss_per_epoch": [],
     }
+
+    if loss_fn is None:
+        loss_fn = F.cross_entropy
+
     model.eval()
 
     with torch.set_grad_enabled(False):  # save memory during inference
 
         valid_acc = compute_accuracy(model, valid_loader, device)
         valid_loss = compute_epoch_loss(model, valid_loader, device)
-        print("*** Valid. Acc.: %.3f%% | Loss: %.3f")
+        print("*** Valid. Acc.: %.3f%% | Loss: %.3f" % (valid_acc, valid_loss))
         log_dict["valid_loss_per_epoch"].append(valid_loss.item())
         log_dict["valid_acc_per_epoch"].append(valid_acc.item())
 
