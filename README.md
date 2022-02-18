@@ -3,8 +3,8 @@ Classifying between 10 different cotegories of 32x32 images.
 
 Differences:
 * Optimizer : Adam instead of SGD
-#### Train Set Accuracy : 99.82%  
-#### Validation Set Accuracy : 79.58%
+#### Train Set Accuracy : 99.82%  @ 70 Epochs
+#### Validation Set Accuracy : 79.58% @ 70 Epochs
 
 TODO:
 - [ ] Reduce overfitting
@@ -24,4 +24,4 @@ Parasitized vs uninfected cells
 * Dropout : 0.5
 * Optimizer : Adam
 
-### Accuracy : 94%
+### Accuracy : 94% 
