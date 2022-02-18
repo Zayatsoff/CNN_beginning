@@ -10,7 +10,7 @@ TODO:
 - [ ] Reduce overfitting
 
 
-You can download the model weights [here](https://anonfiles.com/H3S2BfIex7/checkpoint_pt).
+You can download the model weights [here](https://anonfiles.com/H3S2BfIex7/checkpoint_pt) (682.19MB).
 
 ## Simple CNN classifier in TensorFlow trained on a [Malaria Dataset from NLM](https://lhncbc.nlm.nih.gov/LHC-publications/pubs/MalariaDatasets.html)
 Parasitized vs uninfected cells
