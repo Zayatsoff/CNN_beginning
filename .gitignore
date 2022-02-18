@@ -12,3 +12,5 @@ data/cifar-10-python.tar.gz
 __pycache__/model.cpython-38.pyc
 __pycache__/utils.cpython-38.pyc
 AlexNet_CIFAR10/checkpoint.pt
+AlexNet_CIFAR10/__pycache__/model.cpython-38.pyc
+AlexNet_CIFAR10/__pycache__/utils.cpython-38.pyc
